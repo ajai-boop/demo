@@ -24,6 +24,10 @@ pipeline {
             steps {
                 echo 'Deploying the application...'
                 // Add deployment steps here (e.g., copying JAR/WAR to a server)
+                sh """
+                   sudo docker run -d --name tomcat -p 8080:8080 tomcat
+                   sudo docker cp target/*.war tomcat:/usr/local/tomcat/webapps
+                """
             }
         }
     }
